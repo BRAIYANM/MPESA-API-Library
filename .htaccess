@@ -1,0 +1,16 @@
+# Turn on the rewrite engine
+Options +FollowSymlinks
+RewriteEngine on
+ 
+# Request routing
+RewriteRule ^([a-zA-Z_-]*)\.(html|json|xml)?$   index.php?method=$1&format=$2 [nc,qsa]
+
+# Redirect Trailing Slashes...
+RewriteCond %{REQUEST_URI} !^
+RewriteRule ^(.*)$ /$1 [L]
+
+# Removes file extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
